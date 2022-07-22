@@ -13,6 +13,7 @@ use App\Interfaces\SchoolClassInterface;
 use App\Interfaces\SchoolSessionInterface;
 use App\Interfaces\AcademicSettingInterface;
 use App\Http\Requests\AttendanceTypeUpdateRequest;
+use App\Models\DepartmentSubject;
 
 class AcademicSettingController extends Controller
 {
@@ -70,6 +71,9 @@ class AcademicSettingController extends Controller
 
         $semesters = $this->semesterRepository->getAll($current_school_session_id);
 
+        $departments = DepartmentSubject::all();
+
+
         $data = [
             'current_school_session_id' => $current_school_session_id,
             'latest_school_session_id'  => $latest_school_session->id,
@@ -82,7 +86,7 @@ class AcademicSettingController extends Controller
             'semesters'                 => $semesters,
         ];
 
-        return view('academics.settings', $data);
+        return view('academics.settings', $data, compact('departments'));
     }
 
     /**
