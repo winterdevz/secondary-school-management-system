@@ -108,27 +108,31 @@ class ExamController extends Controller
      */
     public function store(ExamStoreRequest $request)
     {
+        try{
+            $exam = new Exam();
 
-        $exam = new Exam();
+            $exam->exam_name = $request->exam_name;
+            $exam->start_date = $request->start_date;
+            $exam->end_date = $request->end_date;
+            $exam->class_id = $request->class_id;
+            $exam->course_id = $request->course_id;
+            $exam->semester_id = $request->semester_id;
+            $exam->session_id = $request->session_id;
+            $image = $request->file;
+            $imagename = time(). '.' .$image->getClientOriginalExtension();
+            // dd($imagename);
 
-        $exam->exam_name = $request->exam_name;
-        $exam->start_date = $request->start_date;
-        $exam->end_date = $request->end_date;
-        $exam->class_id = $request->class_id;
-        $exam->course_id = $request->course_id;
-        $exam->semester_id = $request->semester_id;
-        $exam->session_id = $request->session_id;
-        $image = $request->file;
-        $imagename = time(). '.' .$image->getClientOriginalExtension();
-        // dd($imagename);
+            $request->file->move('examfolder', $imagename);
+            $exam->exam_file = $imagename;
+            
+            $exam->save();
+            return back()->with('status', 'Exam creation was successful!');
 
-        $request->file->move('examfolder', $imagename);
-        $exam->exam_file = $imagename;
-        
-        $exam->save();
-        return back()->with('status', 'Exam creation was successful!');
-
-
+            
+        }catch (\Exception $e) {
+                return back()->withError($e->getMessage());
+            }
+    
 
         // try {
         //     $examRepository = new ExamRepository();

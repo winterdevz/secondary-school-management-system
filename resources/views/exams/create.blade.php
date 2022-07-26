@@ -18,8 +18,7 @@
                         <div class="row">
                             <div class="col-md-5 mb-4">
                                 <div class="p-3 border bg-light shadow-sm">
-                                    <form action="{{ route('exam.create') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form action="{{ route('exam.create') }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="session_id" value="{{ $current_school_session_id }}">
                                         <div>
@@ -58,12 +57,6 @@
                                             <input type="text" class="form-control" name="exam_name"
                                                 placeholder="Quiz, Assignment, Mid term, Final, ..."
                                                 aria-label="Quiz, Assignment, Mid term, Final, ...">
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="syllabus-file" class="form-label">Exam File</label>
-                                            <input type="file" name="file" class="form-control" id="syllabus-file"
-                                                accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip"
-                                                required>
                                         </div>
                                         <div class="mt-2">
                                             <label for="inputStarts" class="form-label">Starts<sup><i

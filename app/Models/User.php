@@ -66,6 +66,11 @@ class User extends Authenticatable
         return $this->hasOne(StudentParentInfo::class, 'student_id', 'id');
     }
 
+    public function student_payment()
+    {
+        return $this->hasMany(StudentFee::class, 'student_id', 'id');
+    }
+
     /**
      * Get the academic_info.
      */

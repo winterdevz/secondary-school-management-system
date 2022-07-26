@@ -183,4 +183,22 @@ class UserController extends Controller
 
         return view('teachers.list', $data);
     }
+
+
+    // student fee payment function
+    public function paymentStudent($student_id){
+        $student = $this->userRepository->findStudent($student_id);
+        $studentParentInfoRepository = new StudentParentInfoRepository();
+        $parent_info = $studentParentInfoRepository->getParentInfo($student_id);
+        $promotionRepository = new PromotionRepository();
+        $current_school_session_id = $this->getSchoolCurrentSession();
+        $promotion_info = $promotionRepository->getPromotionInfoById($current_school_session_id, $student_id);
+
+        $data = [
+            'student'       => $student,
+            'parent_info'   => $parent_info,
+            'promotion_info'=> $promotion_info,
+        ];
+        return view('students.payment', $data);
+    }
 }

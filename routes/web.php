@@ -24,6 +24,7 @@ use App\Http\Controllers\SchoolSessionController;
 use App\Http\Controllers\AcademicSettingController;
 use App\Http\Controllers\AssignedTeacherController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
+use App\Http\Controllers\StudentFeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,7 +74,14 @@ Route::middleware(['auth'])->group(function () {
         // Student
         Route::post('student/create', [UserController::class, 'storeStudent'])->name('student.create');
         Route::post('student/update', [UserController::class, 'updateStudent'])->name('student.update');
+
+
     });
+
+    // student payment route
+    Route::get('students/payment/{student_id}', [UserController::class, 'paymentStudent']);
+    Route::post('/students/payment/{student_id}', [StudentFeeController::class, 'store']);
+
 
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
