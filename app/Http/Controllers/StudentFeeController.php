@@ -17,10 +17,24 @@ class StudentFeeController extends Controller
         'payment_type' => $request->payment_type,
     ]);
 
-    $payment= StudentFee::all();
+    // $payment= StudentFee::all();
 
-    return view('students.payment', compact('payment'));
+    return redirect()->back();
 
+    }
+
+    public function list($student_id){
+        $receipt  = StudentFee::where('student_id', $student_id)->sum("amount_paid");
+        $payment_id  = StudentFee::select("amount_paid", "student_id", "amount2pay", "payment_type")->where('student_id', $student_id)->first();
+        // dd($payment_id);
+        $student = User::findorfail($student_id);
+        $data = [
+            'receipt' => $receipt,
+            'student' => $student,
+            'payment_id' => $payment_id,
+        ];
+        
+        return view('students.pay-receipt', $data);
     }
 
 

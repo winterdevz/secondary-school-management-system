@@ -81,7 +81,7 @@ Route::middleware(['auth'])->group(function () {
     // student payment route
     Route::get('students/payment/{student_id}', [UserController::class, 'paymentStudent']);
     Route::post('/students/payment/{student_id}', [StudentFeeController::class, 'store']);
-
+    Route::get('/students/payment-receipt/{student_id}', [StudentFeeController::class, 'list']);
 
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');

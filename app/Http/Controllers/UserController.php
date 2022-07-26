@@ -12,6 +12,8 @@ use App\Repositories\PromotionRepository;
 use App\Http\Requests\StudentStoreRequest;
 use App\Http\Requests\TeacherStoreRequest;
 use App\Interfaces\SchoolSessionInterface;
+use App\Models\StudentFee;
+use App\Models\User;
 use App\Repositories\StudentParentInfoRepository;
 
 class UserController extends Controller
@@ -194,10 +196,15 @@ class UserController extends Controller
         $current_school_session_id = $this->getSchoolCurrentSession();
         $promotion_info = $promotionRepository->getPromotionInfoById($current_school_session_id, $student_id);
 
+        // $payment = StudentFee::findorfail($student_id);
+        
+    //   $payment  = StudentFee::select("*")->where('student_id', "=", $student_id)->first();
+        // dd($payment->student_id);
         $data = [
             'student'       => $student,
             'parent_info'   => $parent_info,
             'promotion_info'=> $promotion_info,
+            // 'payment'=> $payment->id,
         ];
         return view('students.payment', $data);
     }

@@ -8,7 +8,7 @@
                 <div class="row pt-2">
                     <div class="col ps-4">
                         <h1 class="display-6 mb-3">
-                            <i class="bi bi-person-lines-fill"></i> Edit Student
+                            <i class="bi bi-person-lines-fill"></i> School Fee
                         </h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
@@ -23,12 +23,10 @@
                             <form class="row g-3" action="{{ url('students/payment/' . $student->id) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="student_id" value="{{ $student->id }}">
-
                                 <div class="row mt-4 g-3">
-                                    <h6>Parents' Information</h6>
                                     <div class="col-3">
-                                        <label for="inputFatherName" class="form-label"><sup>Amount to pay<i
-                                                    class="bi bi-asterisk text-primary"></i></sup></label>
+                                        <label for="inputFatherName" class="form-label">Amount to pay<i
+                                                class="bi bi-asterisk text-primary"></i></label>
                                         <input type="text" class="form-control" id="inputFatherName" name="amount2pay"
                                             placeholder="Amount to pay" required>
                                     </div>
