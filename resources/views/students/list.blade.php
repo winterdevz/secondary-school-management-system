@@ -96,10 +96,13 @@
                                                     @endcan
                                                     {{-- <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-trash2"></i> Delete</button> --}}
 
+                                                    <a href="{{ url('students/report-view/' . $student->student->id) }}"
+                                                        role="button" class="btn btn-sm btn-outline-primary"><i
+                                                            class="bi bi-eye"></i> View Report</a>
+
                                                     <a href="{{ url('students/payment/' . $student->student->id) }}"
                                                         role="button" class="btn btn-sm btn-outline-primary"><i
                                                             class="bi bi-eye"></i> Payment</a>
-
                                                 </div>
                                             </td>
                                         </tr>

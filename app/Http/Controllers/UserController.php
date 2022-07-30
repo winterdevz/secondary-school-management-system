@@ -208,4 +208,23 @@ class UserController extends Controller
         ];
         return view('students.payment', $data);
     }
+
+    public function check_email(Request $request){
+        $check = User::where('email', $request->email)->first();
+        if ($check) {
+            # code...
+        return view('students.create-report', compact('check'));
+
+        } else {
+            # code...
+        return view('students.create-report');
+
+        }
+        
+        
+        // dd($check);
+
+
+
+    }
 }

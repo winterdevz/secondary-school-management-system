@@ -25,6 +25,7 @@ use App\Http\Controllers\AcademicSettingController;
 use App\Http\Controllers\AssignedTeacherController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\StudentFeeController;
+use App\Http\Controllers\StudentReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,10 +75,22 @@ Route::middleware(['auth'])->group(function () {
         // Student
         Route::post('student/create', [UserController::class, 'storeStudent'])->name('student.create');
         Route::post('student/update', [UserController::class, 'updateStudent'])->name('student.update');
+        
 
 
     });
 
+    // check if email is available
+    Route::post('student/check-email', [UserController::class, 'check_email'])->name('check.email');
+
+    // store student score
+    Route::post('student/store-scores', [StudentReportController::class, 'store_scores']);
+    Route::get('students/report-view/{id}', [StudentReportController::class, 'view_scores']);
+
+    
+    // Student Reports
+    Route::get('report/create', [StudentReportController::class, 'create'])->name('report.create');
+      
     // student payment route
     Route::get('students/payment/{student_id}', [UserController::class, 'paymentStudent']);
     Route::post('/students/payment/{student_id}', [StudentFeeController::class, 'store']);
@@ -170,6 +183,8 @@ Route::middleware(['auth'])->group(function () {
     // Notices
     Route::get('/notice/create', [NoticeController::class, 'create'])->name('notice.create');
     Route::post('/notice/create', [NoticeController::class, 'store'])->name('notice.store');
+
+  
 
     // Courses
     Route::get('courses/teacher/index', [AssignedTeacherController::class, 'getTeacherCourses'])->name('course.teacher.list.show');
