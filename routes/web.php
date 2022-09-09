@@ -85,7 +85,7 @@ Route::middleware(['auth'])->group(function () {
 
     // store student score
     Route::post('student/store-scores', [StudentReportController::class, 'store_scores']);
-    Route::get('students/report-view/{id}', [StudentReportController::class, 'view_scores']);
+    Route::get('students/report-view/{id}', [StudentReportController::class, 'view_scores'])->name('student.view.report');
 
     
     // Student Reports
@@ -123,6 +123,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/students/add', [UserController::class, 'createStudent'])->name('student.create.show');
     Route::get('/students/edit/{id}', [UserController::class, 'editStudent'])->name('student.edit.show');
     Route::get('/students/view/list', [UserController::class, 'getStudentList'])->name('student.list.show');
+    Route::get('/students-class/view/list', [UserController::class, 'getStudentListClass'])->name('student-class.list.show');
     Route::get('/students/view/profile/{id}', [UserController::class, 'showStudentProfile'])->name('student.profile.show');
     Route::get('/students/view/attendance/{id}', [AttendanceController::class, 'showStudentAttendance'])->name('student.attendance.show');
 

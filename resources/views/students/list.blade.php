@@ -81,7 +81,7 @@
                                             <td>{{ $student->student->last_name }}</td>
                                             <td>{{ $student->student->email }}</td>
                                             <td>{{ $student->student->phone }}</td>
-                                            <td>
+                                            {{-- <td>
                                                 <div class="btn-group" role="group">
                                                     <a href="{{ route('student.attendance.show', ['id' => $student->student->id]) }}"
                                                         role="button" class="btn btn-sm btn-outline-primary"><i
@@ -94,7 +94,8 @@
                                                             role="button" class="btn btn-sm btn-outline-primary"><i
                                                                 class="bi bi-pen"></i> Edit</a>
                                                     @endcan
-                                                    {{-- <button type="button" class="btn btn-sm btn-primary"><i class="bi bi-trash2"></i> Delete</button> --}}
+                                                    <button type="button" class="btn btn-sm btn-primary"><i
+                                                            class="bi bi-trash2"></i> Delete</button>
 
                                                     <a href="{{ url('students/report-view/' . $student->student->id) }}"
                                                         role="button" class="btn btn-sm btn-outline-primary"><i
@@ -104,6 +105,48 @@
                                                         role="button" class="btn btn-sm btn-outline-primary"><i
                                                             class="bi bi-eye"></i> Payment</a>
                                                 </div>
+                                            </td> --}}
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-outline-primary dropdown-toggle"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a href="{{ route('student.attendance.show', ['id' => $student->student->id]) }}"
+                                                                role="button" class="dropdown-item"><i
+                                                                    class="bi bi-calendar2-week-fill me-2"></i>
+                                                                Attendance</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ url('students/view/profile/' . $student->student->id) }}"
+                                                                role="button"class="dropdown-item"><i
+                                                                    class="bi bi-journal-text me-2"></i> Profile</a>
+                                                        </li>
+                                                        <li>
+                                                            @can('edit users')
+                                                                <a href="{{ route('student.edit.show', ['id' => $student->student->id]) }}"
+                                                                    role="button" class="dropdown-item"><i
+                                                                        class="bi bi-input-cursor me-2"></i> Edit</a>
+                                                            @endcan
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ url('students/report-view/' . $student->student->id) }}"
+                                                                role="button" class="dropdown-item"><i
+                                                                    class="bi bi-calendar2-week me-2"></i> View
+                                                                Report</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ url('students/payment/' . $student->student->id) }}"
+                                                                role="button" class="dropdown-item"><i
+                                                                    class="bi bi-file-post-fill me-2"></i> Payment</a>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+
                                             </td>
                                         </tr>
                                     @endforeach

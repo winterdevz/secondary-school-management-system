@@ -110,7 +110,7 @@
                                                         {{ $academic_setting->attendance_type == 'section' ? 'checked="checked"' : null }}
                                                         value="section">
                                                     <label class="form-check-label" for="attendance_type_section">
-                                                        Attendance by Section
+                                                        Attendance by Term
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
@@ -147,7 +147,8 @@
                                     </div>
                                     <div class="col-md-4 mb-4">
                                         <div class="p-3 border bg-light shadow-sm">
-                                            {{-- <h6>Create Term</h6> --}}
+                                            <h6>Assign Term to class<sup><i class="bi bi-asterisk text-primary"></i></sup>
+                                            </h6>
                                             <form action="{{ route('school.section.create') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="session_id"
@@ -157,8 +158,9 @@
                                                         type="text" placeholder="Section name" required>
                                                 </div> --}}
                                                 <div class="mb-3">
+                                                    <p>Choose term:</p>
 
-                                                    <select class="form-select form-select-sm" style="display: none"
+                                                    <select class="form-select form-select-sm"
                                                         aria-label=".form-select-sm" name="section_name" required>
                                                         @isset($semesters)
                                                             @foreach ($semesters as $semester)
@@ -174,7 +176,7 @@
                                                         value="Class Room" required>
                                                 </div>
                                                 <div>
-                                                    <p>Assign term to class:</p>
+                                                    <p>Choose class:</p>
                                                     <select class="form-select form-select-sm"
                                                         aria-label=".form-select-sm" name="class_id" required>
                                                         @isset($school_classes)
@@ -192,7 +194,7 @@
                                     </div>
                                     <div class="col-md-4 mb-4">
                                         <div class="p-3 border bg-light shadow-sm">
-                                            <h6>Create Course</h6>
+                                            <h6>Create Subject</h6>
                                             <form action="{{ route('school.course.create') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="session_id"
@@ -214,7 +216,7 @@
 
                                                 </select>
                                                 <div class="mb-3">
-                                                    <p class="mt-2">Course Type:<sup><i
+                                                    <p class="mt-2">Department:<sup><i
                                                                 class="bi bi-asterisk text-primary"></i></sup></p>
                                                     <select class="form-select form-select-sm" name="course_type"
                                                         aria-label=".form-select-sm" required>
