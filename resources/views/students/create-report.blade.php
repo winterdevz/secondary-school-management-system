@@ -8,7 +8,7 @@
                 <div class="row pt-2">
                     <div class="col ps-4">
                         <h1 class="display-6 mb-3">
-                            <i class="bi bi-person-lines-fill"></i> Edit Student
+                            <i class="bi bi-person-lines-fill"></i> Make Student Report
                         </h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
@@ -42,7 +42,7 @@
                             @isset($check)
                                 <form class="row g-3" action="{{ url('student/store-scores') }}" method="POST">
                                     @csrf
-                                    <input type="text" name="student_id" value="{{ $check->id }}">
+
                                     <div class="row g-3">
                                         <div class="col-3">
                                             <label for="englishlanguage" class="form-label">English Language<sup><i

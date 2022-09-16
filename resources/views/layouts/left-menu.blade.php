@@ -25,8 +25,8 @@
                             }
                         }
                     @endphp
-                    <a class="nav-link d-flex {{ request()->is('classes') ? 'active' : '' }}"
-                        href="{{ url('classes') }}"><i class="bi bi-diagram-3"></i> <span
+                    <a class="nav-link d-flex {{ request()->is('classes') ? 'active' : '' }}" href="{{ url('classes') }}"><i
+                            class="bi bi-diagram-3"></i> <span
                             class="ms-2 d-inline d-sm-none d-md-none d-xl-inline">Classes</span> <span
                             class="ms-auto d-inline d-sm-none d-md-none d-xl-inline">{{ $classCount }}</span></a>
                 </li>
@@ -53,47 +53,73 @@
                         @endif
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a type="button" href="#teacher-submenu" data-bs-toggle="collapse"
-                        class="d-flex nav-link {{ request()->is('teachers*') ? 'active' : '' }}"><i
-                            class="bi bi-person-lines-fill"></i> <span
-                            class="ms-2 d-inline d-sm-none d-md-none d-xl-inline">Teachers</span>
-                        <i class="ms-auto d-inline d-sm-none d-md-none d-xl-inline bi bi-chevron-down"></i>
-                    </a>
-                    <ul class="nav collapse {{ request()->is('teachers*') ? 'show' : 'hide' }} bg-white"
-                        id="teacher-submenu">
-                        <li class="nav-item w-100"
-                            {{ request()->routeIs('teacher.list.show') ? 'style="font-weight:bold;"' : '' }}><a
-                                class="nav-link" href="{{ route('teacher.list.show') }}"><i
-                                    class="bi bi-person-video2 me-2"></i> View Teachers</a></li>
-                        @if (!session()->has('browse_session_id') && Auth::user()->role == 'admin')
+                @if (Auth::user()->role != 'teacher')
+
+                    <li class="nav-item">
+                        <a type="button" href="#teacher-submenu" data-bs-toggle="collapse"
+                            class="d-flex nav-link {{ request()->is('teachers*') ? 'active' : '' }}"><i
+                                class="bi bi-person-lines-fill"></i> <span
+                                class="ms-2 d-inline d-sm-none d-md-none d-xl-inline">Teachers</span>
+                            <i class="ms-auto d-inline d-sm-none d-md-none d-xl-inline bi bi-chevron-down"></i>
+                        </a>
+                        <ul class="nav collapse {{ request()->is('teachers*') ? 'show' : 'hide' }} bg-white"
+                            id="teacher-submenu">
                             <li class="nav-item w-100"
-                                {{ request()->routeIs('teacher.create.show') ? 'style="font-weight:bold;"' : '' }}><a
-                                    class="nav-link" href="{{ route('teacher.create.show') }}"><i
-                                        class="bi bi-person-plus me-2"></i> Add Teacher</a></li>
-                        @endif
-                    </ul>
-                </li>
+                                {{ request()->routeIs('teacher.list.show') ? 'style="font-weight:bold;"' : '' }}><a
+                                    class="nav-link" href="{{ route('teacher.list.show') }}"><i
+                                        class="bi bi-person-video2 me-2"></i> View Teachers</a></li>
+                            @if (!session()->has('browse_session_id') && Auth::user()->role == 'admin')
+                                <li class="nav-item w-100"
+                                    {{ request()->routeIs('teacher.create.show') ? 'style="font-weight:bold;"' : '' }}>
+                                    <a class="nav-link" href="{{ route('teacher.create.show') }}"><i
+                                            class="bi bi-person-plus me-2"></i> Add Teacher</a>
+                                </li>
+                            @endif
+                        </ul>
+                    </li>
+                @endif
             @endif
             @if (Auth::user()->role == 'teacher')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('courses/teacher*') || request()->is('courses/assignments*') ? 'active' : '' }}"
                         href="{{ route('course.teacher.list.show', ['teacher_id' => Auth::user()->id]) }}"><i
                             class="bi bi-journal-medical"></i> <span
-                            class="ms-1 d-inline d-sm-none d-md-none d-xl-inline">My Courses</span></a>
+                            class="ms-1 d-inline d-sm-none d-md-none d-xl-inline">My Subjects</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('report*') ? 'active' : '' }}"
+                        href="{{ route('report.create') }}"><i class="bi bi-file-post"></i> <span
+                            class="ms-1 d-inline d-sm-none d-md-none d-xl-inline">Report</span></a>
                 </li>
             @endif
+
             @if (Auth::user()->role == 'student')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('student.attendance.show') ? 'active' : '' }}"
                         href="{{ route('student.attendance.show', ['id' => Auth::user()->id]) }}"><i
                             class="bi bi-calendar2-week"></i> <span
                             class="ms-1 d-inline d-sm-none d-md-none d-xl-inline">Attendance</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('student.profile.show') ? 'active' : '' }}"
+                        href="{{ url('students/view/profile/' . Auth::user()->id) }}"><i
+                            class="bi bi-calendar2-week"></i> <span
+                            class="ms-1 d-inline d-sm-none d-md-none d-xl-inline">Profile</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('student.view.report') ? 'active' : '' }}"
+                        href="{{ url('students/report-view/' . Auth::user()->id) }}"><i
+                            class="bi bi-calendar2-week"></i> <span
+                            class="ms-1 d-inline d-sm-none d-md-none d-xl-inline">Report</span></a>
+                </li>
+
+
+
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('course.student.list.show') ? 'active' : '' }}"
                         href="{{ route('course.student.list.show', ['student_id' => Auth::user()->id]) }}"><i
                             class="bi bi-journal-medical"></i> <span
-                            class="ms-1 d-inline d-sm-none d-md-none d-xl-inline">Courses</span></a>
+                            class="ms-1 d-inline d-sm-none d-md-none d-xl-inline">Subjects</span></a>
                 </li>
                 {{-- <li class="nav-item">
                         <a class="nav-link" href="#"><i class="bi bi-file-post"></i> <span class="ms-1 d-inline d-sm-none d-md-none d-xl-inline">Assignments</span></a>
@@ -162,11 +188,7 @@
                                     class="bi bi-file-ruled me-2"></i> View Grade Systems</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('report*') ? 'active' : '' }}"
-                        href="{{ route('report.create') }}"><i class="bi bi-megaphone"></i> <span
-                            class="ms-1 d-inline d-sm-none d-md-none d-xl-inline">Report</span></a>
-                </li>
+
 
                 {{-- <li class="nav-item border-bottom">
                         <a type="button" href="#" class="d-flex nav-link {{ request()->is('marks*')? 'active' : '' }} dropdown-toggle caret-off" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-cloud-sun"></i> <span class="ms-2 d-inline d-sm-none d-md-none d-xl-inline">Marks / Results</span>

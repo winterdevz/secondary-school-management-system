@@ -12,8 +12,11 @@ use App\Repositories\PromotionRepository;
 use App\Http\Requests\StudentStoreRequest;
 use App\Http\Requests\TeacherStoreRequest;
 use App\Interfaces\SchoolSessionInterface;
+use App\Models\AssignedTeacher;
+use App\Models\Promotion;
 use App\Models\StudentFee;
 use App\Models\User;
+use App\Repositories\AttendanceRepository;
 use App\Repositories\StudentParentInfoRepository;
 
 class UserController extends Controller
@@ -76,6 +79,21 @@ class UserController extends Controller
         }
     }
 
+    public function getStudentListClass (Request $request){
+        $teacher = $request->query('teacher_id');
+        dd($teacher);
+        $data = Promotion::where('teacher_id', $teacher)->get(); 
+
+        // $studentListData = [
+        //     'data' => $data,
+        // ];
+        // dd($studentListData);
+        return view('students.list-teacher-class', compact('data'));
+
+
+    }
+
+
 
     public function showStudentProfile($id) {
         $student = $this->userRepository->findStudent($id);
@@ -84,9 +102,15 @@ class UserController extends Controller
         $promotionRepository = new PromotionRepository();
         $promotion_info = $promotionRepository->getPromotionInfoById($current_school_session_id, $id);
 
+        $attendanceRepository = new AttendanceRepository();
+        $attendances = $attendanceRepository->getStudentAttendance($current_school_session_id, $id);
+        // dd($attendances);
+        
         $data = [
             'student'           => $student,
             'promotion_info'    => $promotion_info,
+            'attendances'   => $attendances,
+
         ];
 
         return view('students.profile', $data);

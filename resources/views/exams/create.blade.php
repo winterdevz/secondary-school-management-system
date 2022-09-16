@@ -22,7 +22,7 @@
                                         @csrf
                                         <input type="hidden" name="session_id" value="{{ $current_school_session_id }}">
                                         <div>
-                                            <p>Select Semester:<sup><i class="bi bi-asterisk text-primary"></i></sup></p>
+                                            <p>Select Section:<sup><i class="bi bi-asterisk text-primary"></i></sup></p>
                                             <select class="form-select" name="semester_id">
                                                 @isset($semesters)
                                                     @foreach ($semesters as $semester)
@@ -47,7 +47,7 @@
                                             </select>
                                         </div>
                                         <div>
-                                            <p class="mt-2">Select course:<sup><i
+                                            <p class="mt-2">Select subject:<sup><i
                                                         class="bi bi-asterisk text-primary"></i></sup></p>
                                             <select class="form-select" id="course-select" name="course_id">
                                             </select>
@@ -96,7 +96,7 @@
                     courseSelect.options.length = 0;
                     data.courses.unshift({
                         'id': 0,
-                        'course_name': 'Please select a course'
+                        'course_name': 'Please select a subject'
                     })
                     data.courses.forEach(function(course, key) {
                         courseSelect[key] = new Option(course.course_name, course.id);
