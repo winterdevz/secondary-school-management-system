@@ -1,73 +1,122 @@
-@extends('layouts.app')
+ 
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center mt-4">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header bg-white">{{ __('Login') }}</div>
+<!doctype html>
+<html lang="en">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+<head>
 
-                        <div  class="mb-3 row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+<meta charset="utf-8" />
+<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+<meta content="Themesdesign" name="author" />
+<!-- App favicon -->
+<link rel="shortcut icon" href="assets/images/favicon.ico">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email address">
+<!-- Bootstrap Css -->
+<link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<!-- Icons Css -->
+<link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+<!-- App Css-->
+<link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+</head>
+
+<body class="auth-body-bg">
+<div class="home-btn d-none d-sm-block">
+<a href="index.html"><i class="mdi mdi-home-variant h2 text-white"></i></a>
+</div>
+<div>
+<div class="container-fluid p-0">
+<div class="row g-0">
+<div class="col-lg-4">
+<div class="authentication-page-content p-4 d-flex align-items-center min-vh-100">
+<div class="w-100">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <div>
+                <div class="text-center">
+                    <div>
+                        <a href="index.html" class="logo"><img src="assets/images/logo-dark.png" height="20" alt="logo"></a>
+                    </div>
+
+                    <h4 class="font-size-18 mt-4">Welcome Back !</h4>
+                    <p class="text-muted">Sign in to continue to Nazox.</p>
+                </div>
+
+                <div class="p-2 mt-5">
+                <form method="POST" action="{{ route('login') }}">
+@csrf
+
+                        <div class="mb-3 auth-form-group-custom mb-4">
+                            <i class="ri-user-2-line auti-custom-input-icon"></i>
+                            <label for="username">{{ __('E-Mail Address') }}</label>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email address">
+                            @error('email')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
                         </div>
 
-                        <div  class="mb-3 row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <div class="mb-3 auth-form-group-custom mb-4">
+                            <i class="ri-lock-2-line auti-custom-input-icon"></i>
+                            <label for="userpassword">Password</label>
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+    @error('password')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
                         </div>
 
-                        <div class="mb-3 row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <label class="form-check-label" for="customControlInline">Remember me</label>
                         </div>
 
-                        <div class="mb-3 row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
+                        <div class="mt-4 text-center">
+                            <button  type="submit"  class="btn btn-primary w-md waves-effect waves-light" type="submit">Log In</button>
                         </div>
+                        @if (Route::has('password.request'))
+                        <div class="mt-4 text-center">
+                            <a ref="{{ route('password.request') }}" class="text-muted"><i class="mdi mdi-lock me-1"></i> Forgot your password?</a>
+                        </div>
+                        @endif
                     </form>
                 </div>
+                @if (Route::has('password.request'))
+                <div class="mt-5 text-center">
+                     
+                    <p>© <script>document.write(new Date().getFullYear())</script> Nazox. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
+                </div>
+                @endif
             </div>
         </div>
     </div>
 </div>
-@endsection
+</div>
+</div>
+<div class="col-lg-8">
+<div class="authentication-bg">
+<div class="bg-overlay"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<!-- JAVASCRIPT -->
+<script src="assets/libs/jquery/jquery.min.js"></script>
+<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="assets/libs/simplebar/simplebar.min.js"></script>
+<script src="assets/libs/node-waves/waves.min.js"></script>
+
+<script src="assets/js/app.js"></script>
+
+</body>
+</html>
