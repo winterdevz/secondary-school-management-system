@@ -38,10 +38,10 @@ use App\Http\Controllers\StudentReportController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::redirect('/', '/login');
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {

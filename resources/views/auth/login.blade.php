@@ -40,8 +40,8 @@
                         <a href="index.html" class="logo"><img src="assets/images/logo-dark.png" height="20" alt="logo"></a>
                     </div>
 
-                    <h4 class="font-size-18 mt-4">Welcome Back !</h4>
-                    <p class="text-muted">Sign in to continue to Nazox.</p>
+                    <h4 class="font-size-18 mt-4">Secondary School Managent System </h4>
+                    <p class="text-muted">Welcome Back, Sign in to continue</p>
                 </div>
 
                 <div class="p-2 mt-5">
@@ -89,7 +89,7 @@
                 @if (Route::has('password.request'))
                 <div class="mt-5 text-center">
                      
-                    <p>© <script>document.write(new Date().getFullYear())</script> Nazox. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
+                    <p>© <script>document.write(new Date().getFullYear())</script> EduZeal </p>
                 </div>
                 @endif
             </div>
