@@ -5,9 +5,9 @@
         <div class="row justify-content-start">
             
             <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-                <div class="row pt-2">
-                    <div class="col ps-4">
-                        <h1 class="display-6 mb-3">
+                <div class="row py-5 my-5 ps-2">
+                    <div class="col">
+                        <h1 class="display-6 d-flex align-items-center">
                             <i class="bi bi-person-lines-fill"></i> Student List
                         </h1>
                         <nav aria-label="breadcrumb">

@@ -1,143 +1,140 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="page-content">
-<div class="container-fluid">
-<div class="row">
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
 
-<div class="col-12">
-<div class="row">
-<div class="col-12">
-    <!-- <h1 class="display-6 mb-3"><i class="ms-auto bi bi-grid"></i> {{ __('Dashboard') }}</h1> -->
-    @if (Auth::user()->role != 'student')
-    <div class="row">
-<div class="col-md-4">
-    <div class="card">
-        <div class="card-body">
-            <div class="d-flex">
-                <div class="flex-1 overflow-hidden">
-                    <p class="text-truncate font-size-14 mb-2">Total
-                                    Students</p>
-                    <h4 class="mb-0">{{ $studentCount }}</h4>
-                </div>
-                <div class="text-primary ms-auto">
-                    <i class="ri-user-line font-size-24"></i>
-                </div>
-            </div>
-        </div>
+                <div class="col-12">
+                    <div class="col-12">
+                        <!-- <h1 class="display-6 mb-3"><i class="ms-auto bi bi-grid"></i> {{ __('Dashboard') }}</h1> -->
+                        @if (Auth::user()->role != 'student')
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="flex-1 overflow-hidden">
+                                                    <p class="text-truncate font-size-14 mb-2">Total
+                                                        Students</p>
+                                                    <h4 class="mb-0">{{ $studentCount }}</h4>
+                                                </div>
+                                                <div class="text-primary ms-auto">
+                                                    <i class="ri-user-line font-size-24"></i>
+                                                </div>
+                                            </div>
+                                        </div>
 
-        <div class="card-body border-top py-3">
-            <div class="text-truncate">
-                <!-- <span class="badge badge-soft-success font-size-11"><i class="mdi mdi-menu-up"> </i>
-                    2.4% </span>
-                <span class="text-muted ms-2">From previous period</span> -->
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-md-4">
-    <div class="card">
-        <div class="card-body">
-            <div class="d-flex">
-                <div class="flex-1 overflow-hidden">
-                    <p class="text-truncate font-size-14 mb-2">Total
-                                    Teachers</p>
-                    <h4 class="mb-0">{{ $teacherCount }}</h4>
-                </div>
-                <div class="text-primary ms-auto">
-                    <i class="ri-user-2-fill font-size-24"></i>
-                </div>
-            </div>
-        </div>
-        <div class="card-body border-top py-3">
-            <div class="text-truncate">
-                <!-- <span class="badge badge-soft-success font-size-11"><i class="mdi mdi-menu-up"> </i>
-                    2.4% </span>
-                <span class="text-muted ms-2">From previous period</span> -->
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-md-4">
-    <div class="card">
-        <div class="card-body">
-            <div class="d-flex">
-                <div class="flex-1 overflow-hidden">
-                    <p class="text-truncate font-size-14 mb-2">Total Classes</p>
-                    <h4 class="mb-0">{{ $classCount }}</h4>
-                </div>
-                <div class="text-primary ms-auto">
-                    <i class="ri-briefcase-4-line font-size-24"></i>
-                </div>
-            </div>
-        </div>
-        <div class="card-body border-top py-3">
-            <div class="text-truncate">
-                <!-- <span class="badge badge-soft-success font-size-11"><i class="mdi mdi-menu-up"> </i>
-                    2.4% </span>
-                <span class="text-muted ms-2">From previous period</span> -->
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-      
-        </div>
-        @if ($studentCount > 0)
-            <div class="mt-3 d-flex align-items-center">
-                <div class="col-3">
-                    <span class="ps-2 me-2">Students %</span>
-                    <span class="badge rounded-pill border"
-                        style="background-color: #0678c8;">Male</span>
-                    <span class="badge rounded-pill border"
-                        style="background-color: #49a4fe;">Female</span>
-                </div>
-                @php
-                    $maleStudentPercentage = round($maleStudentsBySession / $studentCount, 2) * 100;
-                    $maleStudentPercentageStyle = "style='background-color: #0678c8; width: $maleStudentPercentage%'";
-                    
-                    $femaleStudentPercentage = round(($studentCount - $maleStudentsBySession) / $studentCount, 2) * 100;
-                    $femaleStudentPercentageStyle = "style='background-color: #49a4fe; width: $femaleStudentPercentage%'";
-                @endphp
-                <div class="col-9 progress">
-                    <div class="progress-bar progress-bar-striped" role="progressbar"
-                        {!! $maleStudentPercentageStyle !!} aria-valuenow="{{ $maleStudentPercentage }}"
-                        aria-valuemin="0" aria-valuemax="100">{{ $maleStudentPercentage }}%</div>
-                    <div class="progress-bar progress-bar-striped" role="progressbar"
-                        {!! $femaleStudentPercentageStyle !!} aria-valuenow="{{ $femaleStudentPercentage }}"
-                        aria-valuemin="0" aria-valuemax="100">{{ $femaleStudentPercentage }}%</div>
-                </div>
-            </div>
-        @endif
-    @endif
-    <div class="row align-items-md-stretch mt-4">
-        <div class="col">
-            <div class="p-3 text-white bg-dark rounded-3">
-                <h3>Welcome to EduZeal!</h3>
-                <!-- <p><i class="bi bi-emoji-heart-eyes"></i> Thanks for your love and support.</p> -->
-            </div>
-        </div>
-        <div class="col">
-            <div class="p-3 bg-white border rounded-3" style="height: 100%;">
-                <h3>Manage school better</h3>
-                <!-- <p class="text-end">with <i class="bi bi-lightning"></i> <a
-                        href="https://github.com/changeweb/Unifiedtransform" target="_blank"
-                        style="text-decoration: none;">Unifiedtransform</a> <i
-                        class="bi bi-lightning"></i>.</p> -->
-            </div>
-        </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-lg-6">
-            <div class="card mb-3">
-                <div class="card-header bg-transparent"><i class="bi bi-calendar-event me-2"></i> Events
-                </div>
-                <div class="card-body text-dark">
-                    @include('components.events.event-calendar', [
-                        'editable' => 'false',
-                        'selectable' => 'false',
-                    ])
-                    {{-- <div class="overflow-auto" style="height: 250px;">
+                                        <div class="card-body border-top py-3">
+                                            <div class="text-truncate">
+                                                <!-- <span class="badge badge-soft-success font-size-11"><i class="mdi mdi-menu-up"> </i>
+                                                                                                                        2.4% </span>
+                                                                                                                    <span class="text-muted ms-2">From previous period</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="flex-1 overflow-hidden">
+                                                    <p class="text-truncate font-size-14 mb-2">Total
+                                                        Teachers</p>
+                                                    <h4 class="mb-0">{{ $teacherCount }}</h4>
+                                                </div>
+                                                <div class="text-primary ms-auto">
+                                                    <i class="ri-user-2-fill font-size-24"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body border-top py-3">
+                                            <div class="text-truncate">
+                                                <!-- <span class="badge badge-soft-success font-size-11"><i class="mdi mdi-menu-up"> </i>
+                                                                                                                        2.4% </span>
+                                                                                                                    <span class="text-muted ms-2">From previous period</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <div class="flex-1 overflow-hidden">
+                                                    <p class="text-truncate font-size-14 mb-2">Total Classes</p>
+                                                    <h4 class="mb-0">{{ $classCount }}</h4>
+                                                </div>
+                                                <div class="text-primary ms-auto">
+                                                    <i class="ri-briefcase-4-line font-size-24"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body border-top py-3">
+                                            <div class="text-truncate">
+                                                <!-- <span class="badge badge-soft-success font-size-11"><i class="mdi mdi-menu-up"> </i>
+                                                                                                                        2.4% </span>
+                                                                                                                    <span class="text-muted ms-2">From previous period</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                    @if ($studentCount > 0)
+                        <div class="mt-3 d-flex align-items-center">
+                            <div class="col-3">
+                                <span class="ps-2 me-2">Students %</span>
+                                <span class="badge rounded-pill border" style="background-color: #0678c8;">Male</span>
+                                <span class="badge rounded-pill border" style="background-color: #49a4fe;">Female</span>
+                            </div>
+                            @php
+                                $maleStudentPercentage = round($maleStudentsBySession / $studentCount, 2) * 100;
+                                $maleStudentPercentageStyle = "style='background-color: #0678c8; width: $maleStudentPercentage%'";
+                                
+                                $femaleStudentPercentage = round(($studentCount - $maleStudentsBySession) / $studentCount, 2) * 100;
+                                $femaleStudentPercentageStyle = "style='background-color: #49a4fe; width: $femaleStudentPercentage%'";
+                            @endphp
+                            <div class="col-9 progress">
+                                <div class="progress-bar progress-bar-striped" role="progressbar" {!! $maleStudentPercentageStyle !!}
+                                    aria-valuenow="{{ $maleStudentPercentage }}" aria-valuemin="0" aria-valuemax="100">
+                                    {{ $maleStudentPercentage }}%</div>
+                                <div class="progress-bar progress-bar-striped" role="progressbar" {!! $femaleStudentPercentageStyle !!}
+                                    aria-valuenow="{{ $femaleStudentPercentage }}" aria-valuemin="0" aria-valuemax="100">
+                                    {{ $femaleStudentPercentage }}%</div>
+                            </div>
+                        </div>
+                    @endif
+                    @endif
+                    <div class="row align-items-md-stretch mt-4 ">
+                        <div class="col">
+                            <div class="p-3 text-white bg-primary rounded-3">
+                                <h3 class="text-white">Welcome to EduZeal!</h3>
+                                <!-- <p><i class="bi bi-emoji-heart-eyes"></i> Thanks for your love and support.</p> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="p-3 bg-white border rounded-3" style="height: 100%;">
+                                <h3>Manage school better</h3>
+                                <!-- <p class="text-end">with <i class="bi bi-lightning"></i> <a
+                                                                                                                            href="https://github.com/changeweb/Unifiedtransform" target="_blank"
+                                                                                                                            style="text-decoration: none;">Unifiedtransform</a> <i
+                                                                                                                            class="bi bi-lightning"></i>.</p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-lg-6">
+                            <div class="card mb-3">
+                                <div class="card-header bg-transparent"><i class="bi bi-calendar-event me-2"></i> Events
+                                </div>
+                                <div class="card-body text-dark">
+                                    @include('components.events.event-calendar', [
+                                        'editable' => 'false',
+                                        'selectable' => 'false',
+                                    ])
+                                    {{-- <div class="overflow-auto" style="height: 250px;">
                     <div class="list-group">
                         <a href="#" class="list-group-item list-group-item-action">
                             <div class="d-flex w-100 justify-content-between">
@@ -149,61 +146,55 @@
                         </a>
                     </div>
                 </div> --}}
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="card mb-3">
-                <div class="card-header bg-transparent d-flex justify-content-between"><span><i
-                            class="bi bi-megaphone me-2"></i> Notices</span> {{ $notices->links() }}
-                </div>
-                <div class="card-body p-0 text-dark">
-                    <div>
-                        @isset($notices)
-                            <div class="accordion accordion-flush" id="noticeAccordion">
-                                @foreach ($notices as $notice)
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="flush-heading{{ $notice->id }}">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#flush-collapse{{ $notice->id }}"
-                                                aria-expanded={{ $loop->first ? 'true' : 'false' }}
-                                                aria-controls="flush-collapse{{ $notice->id }}">
-                                                Published at: {{ $notice->created_at }}
-                                            </button>
-                                        </h2>
-                                        <div id="flush-collapse{{ $notice->id }}"
-                                            class="accordion-collapse collapse {{ $loop->first ? 'show' : 'hide' }}"
-                                            aria-labelledby="flush-heading{{ $notice->id }}"
-                                            data-bs-parent="#noticeAccordion">
-                                            <div class="accordion-body overflow-auto">
-                                                {!! Purify::clean($notice->notice) !!}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card mb-3">
+                                <div class="card-header bg-transparent d-flex justify-content-between"><span><i
+                                            class="bi bi-megaphone me-2"></i> Notices</span> {{ $notices->links() }}
+                                </div>
+                                <div class="card-body p-0 text-dark">
+                                    <div>
+                                        @isset($notices)
+                                            <div class="accordion accordion-flush" id="noticeAccordion">
+                                                @foreach ($notices as $notice)
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="flush-heading{{ $notice->id }}">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#flush-collapse{{ $notice->id }}"
+                                                                aria-expanded={{ $loop->first ? 'true' : 'false' }}
+                                                                aria-controls="flush-collapse{{ $notice->id }}">
+                                                                Published at: {{ $notice->created_at }}
+                                                            </button>
+                                                        </h2>
+                                                        <div id="flush-collapse{{ $notice->id }}"
+                                                            class="accordion-collapse collapse {{ $loop->first ? 'show' : 'hide' }}"
+                                                            aria-labelledby="flush-heading{{ $notice->id }}"
+                                                            data-bs-parent="#noticeAccordion">
+                                                            <div class="accordion-body overflow-auto">
+                                                                {!! Purify::clean($notice->notice) !!}</div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @endisset
+                                            @if (count($notices) < 1)
+                                                <div class="p-3">No notices</div>
+                                            @endif
                                         </div>
                                     </div>
-                                @endforeach
-                            @endisset
-                            @if (count($notices) < 1)
-                                <div class="p-3">No notices</div>
-                            @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-</div>
-</div>
-
-</div>
-</div>
-</div>
-</div>  
 
 
 
-
-
-<!-- End Page-content -->
+    <!-- End Page-content -->
 @endsection
-
-

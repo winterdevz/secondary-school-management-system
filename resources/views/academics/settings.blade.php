@@ -2,15 +2,28 @@
 
 @section('content')
     <script src="{{ asset('js/masonry.pkgd.min.js') }}"></script>
-    <div class="container">
-        <div class="row justify-content-start">
-            
-            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-                <div class="row pt-2">
+    <div class="page-content mb-5">
+        <div class="container-fluid">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <div class="row ">
                     <div class="col ps-4">
-                        <h1 class="display-6 mb-3">
-                            <i class="bi bi-tools"></i> Academic Settings
-                        </h1>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h2 class="mb-sm-0">
+                                        <i class="ri-list-settings-line btn btn-primary"></i>
+                                        Academic Settings
+                                    </h2>
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Academic Settings</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
 
                         @include('session-messages')
 
@@ -18,8 +31,9 @@
                             <div class="row" data-masonry='{"percentPosition": true }'>
                                 @if ($latest_school_session_id == $current_school_session_id)
                                     <div class="col-md-4 mb-4">
-                                        <div class="p-3 border bg-light shadow-sm">
-                                            <h6>Create Session</h6>
+                                        <div class="p-3 border bg-white shadow-sm">
+                                            <h5>Create Session</h5>
+                                            <hr>
                                             <p class="text-danger">
                                                 <small><i class="bi bi-exclamation-diamond-fill me-2"></i> Create one
                                                     Session per academic year. Last created session will be considered as
@@ -32,15 +46,16 @@
                                                         placeholder="2021 - 2022" aria-label="Current Session"
                                                         name="session_name" required>
                                                 </div>
-                                                <button class="btn btn-sm btn-outline-primary" type="submit"><i
+                                                <button class="btn btn-sm btn-primary px-3" type="submit"><i
                                                         class="bi bi-check2"></i> Create</button>
                                             </form>
                                         </div>
                                     </div>
                                 @endif
                                 <div class="col-md-4 mb-4">
-                                    <div class="p-3 border bg-light shadow-sm">
-                                        <h6>Browse by Session</h6>
+                                    <div class="p-3 border bg-white shadow-sm">
+                                        <h5>Browse by Session</h5>
+                                        <hr>
                                         <p class="text-danger">
                                             <small><i class="bi bi-exclamation-diamond-fill me-2"></i> Only use this when
                                                 you want to browse data from previous Sessions.</small>
@@ -59,45 +74,47 @@
                                                     @endisset
                                                 </select>
                                             </div>
-                                            <button class="btn btn-sm btn-outline-primary" type="submit"><i
+                                            <button class="btn btn-sm btn-primary px-3" type="submit"><i
                                                     class="bi bi-check2"></i> Set</button>
                                         </form>
                                     </div>
                                 </div>
                                 @if ($latest_school_session_id == $current_school_session_id)
                                     <div class="col-md-4 mb-4">
-                                        <div class="p-3 border bg-light shadow-sm">
-                                            <h6>Create Term for Current Session</h6>
+                                        <div class="p-3 border bg-white shadow-sm">
+                                            <h5>Create Term for Current Session</h5>
+                                            <hr>
                                             <form action="{{ route('school.semester.create') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="session_id"
                                                     value="{{ $current_school_session_id }}">
                                                 <div class="mt-2">
-                                                    <p>Term name<sup><i class="bi bi-asterisk text-primary"></i></sup></p>
+                                                    <p>Term name<sup><i class="ri-asterisk text-primary"></i></sup></p>
                                                     <input type="text" class="form-control form-control-sm"
                                                         placeholder="First Term" aria-label="Semester name"
                                                         name="semester_name" required>
                                                 </div>
                                                 <div class="mt-2">
                                                     <label for="inputStarts" class="form-label">Starts<sup><i
-                                                                class="bi bi-asterisk text-primary"></i></sup></label>
+                                                                class="ri-asterisk text-primary"></i></sup></label>
                                                     <input type="date" class="form-control form-control-sm"
                                                         id="inputStarts" placeholder="Starts" name="start_date" required>
                                                 </div>
                                                 <div class="mt-2">
                                                     <label for="inputEnds" class="form-label">Ends<sup><i
-                                                                class="bi bi-asterisk text-primary"></i></sup></label>
+                                                                class="ri-asterisk text-primary"></i></sup></label>
                                                     <input type="date" class="form-control form-control-sm"
                                                         id="inputEnds" placeholder="Ends" name="end_date" required>
                                                 </div>
-                                                <button type="submit" class="mt-3 btn btn-sm btn-outline-primary"><i
+                                                <button type="submit" class="mt-3 btn btn-sm btn-primary px-3"><i
                                                         class="bi bi-check2"></i> Create</button>
                                             </form>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-4">
-                                        <div class="p-3 border bg-light shadow-sm">
-                                            <h6>Attendance Type</h6>
+                                        <div class="p-3 border bg-white shadow-sm">
+                                            <h5>Attendance Type</h5>
+                                            <hr>
                                             <p class="text-danger">
                                                 <small><i class="bi bi-exclamation-diamond-fill me-2"></i> Do not change the
                                                     type in the middle of a Term.</small>
@@ -123,14 +140,15 @@
                                                     </label>
                                                 </div>
 
-                                                <button type="submit" class="mt-3 btn btn-sm btn-outline-primary"><i
+                                                <button type="submit" class="mt-3 btn btn-sm btn-primary px-3"><i
                                                         class="bi bi-check2"></i> Save</button>
                                             </form>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-4">
-                                        <div class="p-3 border bg-light shadow-sm">
-                                            <h6>Create Class</h6>
+                                        <div class="p-3 border bg-white shadow-sm">
+                                            <h5>Create Class</h5>
+                                            <hr>
                                             <form action="{{ route('school.class.create') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="session_id"
@@ -140,15 +158,16 @@
                                                         name="class_name" placeholder="Class name"
                                                         aria-label="Class name" required>
                                                 </div>
-                                                <button class="btn btn-sm btn-outline-primary" type="submit"><i
+                                                <button class="btn btn-sm btn-primary px-3" type="submit"><i
                                                         class="bi bi-check2"></i> Create</button>
                                             </form>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-4">
-                                        <div class="p-3 border bg-light shadow-sm">
-                                            <h6>Assign Term to class<sup><i class="bi bi-asterisk text-primary"></i></sup>
-                                            </h6>
+                                        <div class="p-3 border bg-white shadow-sm">
+                                            <h5>Assign Term to class<sup><i class="ri-asterisk text-primary"></i></sup>
+                                            </h5>
+                                            <hr>
                                             <form action="{{ route('school.section.create') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="session_id"
@@ -187,24 +206,22 @@
                                                         @endisset
                                                     </select>
                                                 </div>
-                                                <button type="submit" class="mt-3 btn btn-sm btn-outline-primary"><i
+                                                <button type="submit" class="mt-3 btn btn-sm btn-primary px-3"><i
                                                         class="bi bi-check2"></i> Save</button>
                                             </form>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-4">
-                                        <div class="p-3 border bg-light shadow-sm">
-                                            <h6>Create Subject</h6>
+                                        <div class="p-3 border bg-white shadow-sm">
+                                            <h5>Create Subject</h5>
+                                            <hr>
                                             <form action="{{ route('school.course.create') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="session_id"
                                                     value="{{ $current_school_session_id }}">
-                                                {{-- <div class="mb-1">
-                                                    <input type="text" class="form-control form-control-sm"
-                                                        name="course_name" placeholder="Course name"
-                                                        aria-label="Course name" required>
-                                                </div> --}}
 
+                                                <p class="mt-2">Select Subject:<sup><i
+                                                            class="ri-asterisk text-primary"></i></sup></p>
                                                 <select class="form-select form-select-sm" name="course_name"
                                                     aria-label=".form-select-sm" required>
                                                     <option value="" selected="">Subject name</option>
@@ -217,7 +234,7 @@
                                                 </select>
                                                 <div class="mb-3">
                                                     <p class="mt-2">Department:<sup><i
-                                                                class="bi bi-asterisk text-primary"></i></sup></p>
+                                                                class="ri-asterisk text-primary"></i></sup></p>
                                                     <select class="form-select form-select-sm" name="course_type"
                                                         aria-label=".form-select-sm" required>
                                                         <option value="" selected="">Select Department</option>
@@ -228,8 +245,8 @@
                                                     </select>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <p>Assign to term:<sup><i
-                                                                class="bi bi-asterisk text-primary"></i></sup></p>
+                                                    <p>Assign to term:<sup><i class="ri-asterisk text-primary"></i></sup>
+                                                    </p>
                                                     <select class="form-select form-select-sm"
                                                         aria-label=".form-select-sm" name="semester_id" required>
                                                         @isset($semesters)
@@ -241,8 +258,8 @@
                                                     </select>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <p>Assign to class:<sup><i
-                                                                class="bi bi-asterisk text-primary"></i></sup></p>
+                                                    <p>Assign to class:<sup><i class="ri-asterisk text-primary"></i></sup>
+                                                    </p>
                                                     <select class="form-select form-select-sm"
                                                         aria-label=".form-select-sm" name="class_id" required>
                                                         @isset($school_classes)
@@ -253,21 +270,22 @@
                                                         @endisset
                                                     </select>
                                                 </div>
-                                                <button class="btn btn-sm btn-outline-primary" type="submit"><i
+                                                <button class="btn btn-sm btn-primary px-3" type="submit"><i
                                                         class="bi bi-check2"></i> Create</button>
                                             </form>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-4">
-                                        <div class="p-3 border bg-light shadow-sm">
-                                            <h6>Assign Teacher</h6>
+                                        <div class="p-3 border bg-white shadow-sm">
+                                            <h5>Assign Teacher</h5>
+                                            <hr>
                                             <form action="{{ route('school.teacher.assign') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="session_id"
                                                     value="{{ $current_school_session_id }}">
                                                 <div class="mb-3">
                                                     <p class="mt-2">Select Teacher:<sup><i
-                                                                class="bi bi-asterisk text-primary"></i></sup></p>
+                                                                class="ri-asterisk text-primary"></i></sup></p>
                                                     <select class="form-select form-select-sm"
                                                         aria-label=".form-select-sm" name="teacher_id" required>
                                                         @isset($teachers)
@@ -280,8 +298,8 @@
                                                     </select>
                                                 </div>
                                                 <div class="mb-3" style="display: none">
-                                                    <p>Assign to term:<sup><i
-                                                                class="bi bi-asterisk text-primary"></i></sup></p>
+                                                    <p>Assign to term:<sup><i class="ri-asterisk text-primary"></i></sup>
+                                                    </p>
                                                     <select class="form-select form-select-sm"
                                                         aria-label=".form-select-sm" name="semester_id" required>
                                                         @isset($semesters)
@@ -293,8 +311,8 @@
                                                     </select>
                                                 </div>
                                                 <div>
-                                                    <p>Assign to class:<sup><i
-                                                                class="bi bi-asterisk text-primary"></i></sup></p>
+                                                    <p>Assign to class:<sup><i class="ri-asterisk text-primary"></i></sup>
+                                                    </p>
                                                     <select onchange="getSectionsAndCourses(this);"
                                                         class="form-select form-select-sm" aria-label=".form-select-sm"
                                                         name="class_id" required>
@@ -309,26 +327,27 @@
                                                 </div>
                                                 <div>
                                                     <p class="mt-2">Assign to term:<sup><i
-                                                                class="bi bi-asterisk text-primary"></i></sup></p>
+                                                                class="ri-asterisk text-primary"></i></sup></p>
                                                     <select class="form-select form-select-sm" id="section-select"
                                                         aria-label=".form-select-sm" name="section_id" required>
                                                     </select>
                                                 </div>
                                                 <div>
                                                     <p class="mt-2">Assign to subject:<sup><i
-                                                                class="bi bi-asterisk text-primary"></i></sup></p>
+                                                                class="ri-asterisk text-primary"></i></sup></p>
                                                     <select class="form-select form-select-sm" id="course-select"
                                                         aria-label=".form-select-sm" name="course_id" required>
                                                     </select>
                                                 </div>
-                                                <button type="submit" class="mt-3 btn btn-sm btn-outline-primary"><i
+                                                <button type="submit" class="mt-3 btn btn-sm btn-primary px-3"><i
                                                         class="bi bi-check2"></i> Save</button>
                                             </form>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-4">
-                                        <div class="p-3 border bg-light shadow-sm">
-                                            <h6>Allow Final Marks Submission</h6>
+                                        <div class="p-3 border bg-white shadow-sm">
+                                            <h5>Allow Final Marks Submission</h5>
+                                            <hr>
                                             <form action="{{ route('school.final.marks.submission.status.update') }}"
                                                 method="POST">
                                                 @csrf
@@ -348,7 +367,7 @@
                                                     <label class="form-check-label"
                                                         for="marks_submission_status_check">{{ $academic_setting->marks_submission_status == 'on' ? 'Allowed' : 'Disallowed' }}</label>
                                                 </div>
-                                                <button type="submit" class="mt-3 btn btn-sm btn-outline-primary"><i
+                                                <button type="submit" class="mt-3 btn btn-sm btn-primary px-3"><i
                                                         class="bi bi-check2"></i> Save</button>
                                             </form>
                                         </div>
@@ -358,7 +377,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>

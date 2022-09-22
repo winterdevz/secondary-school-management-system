@@ -1,21 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-start">
-            
-            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-                <div class="row pt-2">
-                    <div class="col-md-5 ps-4">
-                        <h1 class="display-6 mb-3"><i class="bi bi-journal-text"></i> Create Syllabus</h1>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Create Syllabus</li>
-                            </ol>
-                        </nav>
+    <div class="page-content mb-5">
+        <div class="container-fluid">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <div class="row ">
+                    <div class="col ps-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h2 class="mb-sm-0">
+                                        <i class="ri-archive-line btn btn-primary"></i>
+                                        Create Syllabus
+                                    </h2>
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Create Syllabus</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
                         @include('session-messages')
-                        <div class="p-3 border bg-light shadow-sm">
+                        <div class="p-3 border bg-white shadow-sm">
                             <form action="{{ route('syllabus.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="session_id" value="{{ $current_school_session_id }}">
@@ -25,13 +36,14 @@
                                         @isset($school_classes)
                                             <option selected disabled>Please select a class</option>
                                             @foreach ($school_classes as $school_class)
-                                                <option value="{{ $school_class->id }}">{{ $school_class->class_name }}</option>
+                                                <option value="{{ $school_class->id }}">
+                                                    {{ $school_class->class_name }}</option>
                                             @endforeach
                                         @endisset
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <p class="mb-2">Select subject:<sup><i class="bi bi-asterisk text-primary"></i></sup>
+                                    <p class="mb-2">Select subject:<sup><i class="ri-asterisk text-primary"></i></sup>
                                     </p>
                                     <select class="form-select" id="course-select" name="course_id">
                                     </select>
@@ -47,15 +59,15 @@
                                         accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip"
                                         required>
                                 </div>
-                                <div class="mb-4">
-                                    <button type="submit" class="btn btn-outline-primary"><i class="bi bi-check2"></i>
+                                <div class="mb-4 d-flex justify-content-lg-end">
+                                    <button type="submit" class="btn btn-primary px-4">
                                         Create</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>

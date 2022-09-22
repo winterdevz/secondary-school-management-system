@@ -1,19 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-start">
- 
-            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-                <div class="row pt-2">
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <div class="row ">
                     <div class="col ps-4">
-                        <h1 class="display-6 mb-3"><i class="bi bi-diagram-3"></i> Classes</h1>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Classes</li>
-                            </ol>
-                        </nav>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h2 class="mb-sm-0">
+                                        <i class="ri-numbers-line btn btn-primary"></i>
+                                        Classes
+                                    </h2>
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Classes</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             @isset($school_classes)
                                 @foreach ($school_classes as $school_class)
@@ -23,21 +32,21 @@
                                     <div class="col-12">
                                         <div class="card my-3">
                                             <div class="card-header bg-transparent">
-                                                <ul class="nav nav-tabs card-header-tabs">
+                                                <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
                                                     <li class="nav-item">
-                                                        <button class="nav-link active" data-bs-toggle="tab"
+                                                        <button class="nav-link text-primary active" data-bs-toggle="tab"
                                                             data-bs-target="#class{{ $school_class->id }}" role="tab"
                                                             aria-current="true"><i class="bi bi-diagram-3"></i>
                                                             {{ $school_class->class_name }}</button>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <button class="nav-link" data-bs-toggle="tab"
+                                                        <button class="nav-link text-primary" data-bs-toggle="tab"
                                                             data-bs-target="#class{{ $school_class->id }}-syllabus"
                                                             role="tab" aria-current="false"><i
                                                                 class="bi bi-journal-text"></i> Syllabus</button>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <button class="nav-link" data-bs-toggle="tab"
+                                                        <button class="nav-link text-primary" data-bs-toggle="tab"
                                                             data-bs-target="#class{{ $school_class->id }}-courses"
                                                             role="tab" aria-current="false"><i
                                                                 class="bi bi-journal-medical"></i> Subjects</button>
@@ -77,7 +86,7 @@
                                                                                         @can('edit sections')
                                                                                             <span><a href="{{ route('section.edit', ['id' => $school_section->id]) }}"
                                                                                                     role="button"
-                                                                                                    class="btn btn-sm btn-outline-primary"><i
+                                                                                                    class="btn btn-sm btn-primary"><i
                                                                                                         class="bi bi-pencil"></i>
                                                                                                     Edit</a></span>
                                                                                         @endcan
@@ -118,7 +127,7 @@
                                                                                 <div class="btn-group" role="group">
                                                                                     <a href="{{ asset('storage/' . $syllabus->syllabus_file_path) }}"
                                                                                         role="button"
-                                                                                        class="btn btn-sm btn-outline-primary"><i
+                                                                                        class="btn btn-sm btn-primary"><i
                                                                                             class="bi bi-download"></i> Download</a>
                                                                                 </div>
                                                                             </td>
@@ -147,8 +156,8 @@
                                                                             <td>
                                                                                 @can('edit courses')
                                                                                     <a href="{{ route('course.edit', ['id' => $course->id]) }}"
-                                                                                        class="btn btn-sm btn-outline-primary"
-                                                                                        role="button"><i class="bi bi-pencil"></i>
+                                                                                        class="btn btn-sm btn-primary" role="button"><i
+                                                                                            class="bi bi-pencil"></i>
                                                                                         Edit</a>
                                                                                 @endcan
                                                                             </td>
@@ -166,7 +175,7 @@
                                                 @endisset
                                                 @can('edit classes')
                                                     <span><a href="{{ route('class.edit', ['id' => $school_class->id]) }}"
-                                                            class="btn btn-sm btn-outline-primary" role="button"><i
+                                                            class="btn btn-sm btn-primary" role="button"><i
                                                                 class="bi bi-pencil"></i> Edit Class</a></span>
                                                 @endcan
                                             </div>
@@ -177,7 +186,6 @@
                         </div>
                     </div>
                 </div>
-              
             </div>
         </div>
     </div>

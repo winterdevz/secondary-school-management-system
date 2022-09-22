@@ -1,21 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-start">
-            
-            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-                <div class="row pt-2">
+    <div class="page-content mb-5">
+        <div class="container-fluid">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <div class="row ">
                     <div class="col ps-4">
-                        <h1 class="display-6 mb-3">
-                            <i class="bi bi-person-lines-fill"></i> Student List
-                        </h1>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Student List</li>
-                            </ol>
-                        </nav>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h2 class="mb-sm-0">
+                                        <i class="ri-contacts-line btn btn-primary"></i>
+                                        Student List
+                                    </h2>
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Student List</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                         @include('session-messages')
                         <h6>Filter list by:</h6>
                         <div class="mb-4 mt-4">
@@ -47,7 +55,8 @@
                             </form>
                             @foreach ($studentList as $student)
                                 @if ($loop->first)
-                                    <p class="mt-3"><b>Section:</b> {{ $student->section->section_name }}</p>
+                                    <p class="mt-3"><b>Section:</b>
+                                        {{ $student->section->section_name }}</p>
                                 @break
                             @endif
                         @endforeach
@@ -77,8 +86,10 @@
                                                     <i class="bi bi-person-square"></i>
                                                 @endif
                                             </td>
-                                            <td>{{ $student->student->first_name }}</td>
-                                            <td>{{ $student->student->last_name }}</td>
+                                            <td class="text-capitalize">
+                                                {{ $student->student->first_name }}</td>
+                                            <td class="text-capitalize">
+                                                {{ $student->student->last_name }}</td>
                                             <td>{{ $student->student->email }}</td>
                                             <td>{{ $student->student->phone }}</td>
                                             {{-- <td>
@@ -123,25 +134,29 @@
                                                         <li>
                                                             <a href="{{ url('students/view/profile/' . $student->student->id) }}"
                                                                 role="button"class="dropdown-item"><i
-                                                                    class="bi bi-journal-text me-2"></i> Profile</a>
+                                                                    class="bi bi-journal-text me-2"></i>
+                                                                Profile</a>
                                                         </li>
                                                         <li>
                                                             @can('edit users')
                                                                 <a href="{{ route('student.edit.show', ['id' => $student->student->id]) }}"
                                                                     role="button" class="dropdown-item"><i
-                                                                        class="bi bi-input-cursor me-2"></i> Edit</a>
+                                                                        class="bi bi-input-cursor me-2"></i>
+                                                                    Edit</a>
                                                             @endcan
                                                         </li>
                                                         <li>
                                                             <a href="{{ url('students/report-view/' . $student->student->id) }}"
                                                                 role="button" class="dropdown-item"><i
-                                                                    class="bi bi-calendar2-week me-2"></i> View
+                                                                    class="bi bi-calendar2-week me-2"></i>
+                                                                View
                                                                 Report</a>
                                                         </li>
                                                         <li>
                                                             <a href="{{ url('students/payment/' . $student->student->id) }}"
                                                                 role="button" class="dropdown-item"><i
-                                                                    class="bi bi-file-post-fill me-2"></i> Payment</a>
+                                                                    class="bi bi-file-post-fill me-2"></i>
+                                                                Payment</a>
                                                         </li>
                                                     </ul>
 
@@ -156,7 +171,7 @@
                     </div>
                 </div>
             </div>
-             
+
         </div>
     </div>
 </div>

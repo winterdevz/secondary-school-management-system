@@ -1,133 +1,122 @@
+<!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
 
+    <div data-simplebar class="h-100">
 
-   <!-- ========== Left Sidebar Start ========== -->
-   <div class="vertical-menu">
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title">Menu</li>
 
-<div data-simplebar class="h-100">
-
-    <!--- Sidemenu -->
-    <div id="sidebar-menu">
-        <!-- Left Menu Start -->
-        <ul class="metismenu list-unstyled" id="side-menu">
-            <li class="menu-title">Menu</li>
-
-            <li>
-                <a href="{{ url('home') }}" class="waves-effect">
-                    <i class="ri-dashboard-line"></i><span
-                        class="badge rounded-pill bg-success float-end">3</span>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-                
-            @can('view classes')
                 <li>
-                    @php
-                        if (session()->has('browse_session_id')) {
-                            $classCount = \App\Models\SchoolClass::where('session_id', session('browse_session_id'))->count();
-                        } else {
-                            $latest_session = \App\Models\SchoolSession::latest()->first();
-                            if ($latest_session) {
-                                $classCount = \App\Models\SchoolClass::where('session_id', $latest_session->id)->count();
-                            } else {
-                                $classCount = 0;
-                            }
-                        }
-                    @endphp
-                    <a class="waves-effect" href="{{ url('classes') }}">  <i class="ri-calendar-2-line"></i>Classes<span
-                           >{{ $classCount }}</span></a>
-                </li>
-            @endcan
-            @if (Auth::user()->role != 'student')
-                <li>
-                    <a type="button" href="#student-submenu" data-bs-toggle="collapse"
-                        class="d-flex waves-effect {{ request()->is('students*') ? 'active' : '' }}"><i
-                            class="bi bi-person-lines-fill"></i> <span
-                            >Students</span>
-                        <i class="ms-auto d-inline d-sm-none d-md-none d-xl-inline bi bi-chevron-down"></i>
+                    <a href="{{ url('home') }}" class="waves-effect">
+                        <i class="ri-dashboard-line"></i><span class="badge rounded-pill bg-success float-end"></span>
+                        <span>Dashboard</span>
                     </a>
-                    <ul class="sub-menu {{ request()->is('students*') ? 'show' : 'hide' }}  "
-                        id="student-submenu">
-                        <li
-                            {{ request()->routeIs('student.list.show') ? 'style="font-weight:bold;"' : '' }}><a
-                                class="waves-effect" href="{{ route('student.list.show') }}"><i
-                                    class="bi bi-person-video2 me-2"></i> View Students</a></li>
-                        @if (!session()->has('browse_session_id') && Auth::user()->role == 'admin')
-                            <li
-                                {{ request()->routeIs('student.create.show') ? 'style="font-weight:bold;"' : '' }}><a
-                                    class="waves-effect" href="{{ route('student.create.show') }}"><i
-                                        class="bi bi-person-plus me-2"></i> Add Student</a></li>
-                        @endif
-                    </ul>
                 </li>
-                @if (Auth::user()->role != 'teacher')
 
+                @can('view classes')
                     <li>
-                        <a type="button" href="#teacher-submenu" data-bs-toggle="collapse"
-                            class="d-flex waves-effect {{ request()->is('teachers*') ? 'active' : '' }}"><i
-                                class="bi bi-person-lines-fill"></i> <span >Teachers</span>
+                        @php
+                            if (session()->has('browse_session_id')) {
+                                $classCount = \App\Models\SchoolClass::where('session_id', session('browse_session_id'))->count();
+                            } else {
+                                $latest_session = \App\Models\SchoolSession::latest()->first();
+                                if ($latest_session) {
+                                    $classCount = \App\Models\SchoolClass::where('session_id', $latest_session->id)->count();
+                                } else {
+                                    $classCount = 0;
+                                }
+                            }
+                        @endphp
+                        <a class="waves-effect" href="{{ url('classes') }}"> <i class="ri-calendar-2-line"></i><span
+                                class="badge rounded-pill bg-success float-end">{{ $classCount }}</span>
+                            <span>Classes</span>
+                        </a>
+
+                    </li>
+                @endcan
+                @if (Auth::user()->role != 'student')
+                    <li>
+                        <a type="button" href="#student-submenu" data-bs-toggle="collapse"
+                            class="has-arrow d-flex waves-effect {{ request()->is('students*') ? 'active' : '' }}"><i
+                                class="ri-user-line"></i> <span>Students</span>
                             <i class="ms-auto d-inline d-sm-none d-md-none d-xl-inline bi bi-chevron-down"></i>
                         </a>
-                       
-                        <ul class="sub-menu {{ request()->is('teachers*') ? 'show' : 'hide' }}"
-                            id="teacher-submenu">
-                            <li class="waves-effect w-100"
-                                {{ request()->routeIs('teacher.list.show') ? 'style="font-weight:bold;"' : '' }}><a
-                                    class="waves-effect" href="{{ route('teacher.list.show') }}"><i
-                                        class="bi bi-person-video2 me-2"></i> View Teachers</a></li>
+                        <ul class="sub-menu {{ request()->is('students*') ? 'show' : 'hide' }}  " aria-expanded="false">
+                            <li {{ request()->routeIs('student.list.show') ? 'style="font-weight:bold;"' : '' }}><a
+                                    class="waves-effect" href="{{ route('student.list.show') }}"> View Students</a></li>
                             @if (!session()->has('browse_session_id') && Auth::user()->role == 'admin')
-                                <li class="waves-effect w-100"
-                                    {{ request()->routeIs('teacher.create.show') ? 'style="font-weight:bold;"' : '' }}>
-                                    <a class="nav-link" href="{{ route('teacher.create.show') }}"><i
-                                            class="bi bi-person-plus me-2"></i> Add Teacher</a>
+                                <li {{ request()->routeIs('student.create.show') ? 'style="font-weight:bold;"' : '' }}>
+                                    <a class="waves-effect" href="{{ route('student.create.show') }}"> Add Student</a>
                                 </li>
                             @endif
                         </ul>
                     </li>
+                    @if (Auth::user()->role != 'teacher')
+
+                        <li>
+                            <a type="button" href="#teacher-submenu" data-bs-toggle="collapse"
+                                class="has-arrow d-flex waves-effect {{ request()->is('teachers*') ? 'active' : '' }}"><i
+                                    class="ri-user-2-line"></i><span>Teachers</span>
+                                <i class="ms-auto d-inline d-sm-none d-md-none d-xl-inline bi bi-chevron-down"></i>
+                            </a>
+
+                            <ul class="sub-menu {{ request()->is('teachers*') ? 'show' : 'hide' }}"
+                                id="teacher-submenu">
+                                <li class="waves-effect w-100"
+                                    {{ request()->routeIs('teacher.list.show') ? 'style="font-weight:bold;"' : '' }}><a
+                                        class="waves-effect" href="{{ route('teacher.list.show') }}">View Teachers</a>
+                                </li>
+                                @if (!session()->has('browse_session_id') && Auth::user()->role == 'admin')
+                                    <li class="waves-effect w-100"
+                                        {{ request()->routeIs('teacher.create.show') ? 'style="font-weight:bold;"' : '' }}>
+                                        <a class="nav-link" href="{{ route('teacher.create.show') }}"></i> Add
+                                            Teacher</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
                 @endif
-            @endif
-            @if (Auth::user()->role == 'teacher')
-                <li>
-                    <a class="waves-effect {{ request()->is('courses/teacher*') || request()->is('courses/assignments*') ? 'active' : '' }}"
-                        href="{{ route('course.teacher.list.show', ['teacher_id' => Auth::user()->id]) }}"><i
-                            class="bi bi-journal-medical"></i> <span
-                             >My Subjects</span></a>
-                </li>
-                <li>
-                    <a class="waves-effect {{ request()->is('report*') ? 'active' : '' }}"
-                        href="{{ route('report.create') }}"><i class="bi bi-file-post"></i> <span
-                             >Report</span></a>
-                </li>
-            @endif
+                @if (Auth::user()->role == 'teacher')
+                    <li>
+                        <a class="waves-effect {{ request()->is('courses/teacher*') || request()->is('courses/assignments*') ? 'active' : '' }}"
+                            href="{{ route('course.teacher.list.show', ['teacher_id' => Auth::user()->id]) }}"><i
+                                class="bi bi-journal-medical"></i> <span>My Subjects</span></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect {{ request()->is('report*') ? 'active' : '' }}"
+                            href="{{ route('report.create') }}"><i class="bi bi-file-post"></i> <span>Report</span></a>
+                    </li>
+                @endif
 
-            @if (Auth::user()->role == 'student')
-                <li>
-                    <a class="waves-effect {{ request()->routeIs('student.attendance.show') ? 'active' : '' }}"
-                        href="{{ route('student.attendance.show', ['id' => Auth::user()->id]) }}"><i
-                            class="bi bi-calendar2-week"></i> <span
-                             >Attendance</span></a>
-                </li>
-                <li>
-                    <a class="waves-effect {{ request()->routeIs('student.profile.show') ? 'active' : '' }}"
-                        href="{{ url('students/view/profile/' . Auth::user()->id) }}"><i
-                            class="bi bi-calendar2-week"></i> <span
-                             >Profile</span></a>
-                </li>
-                <li>
-                    <a class="waves-effect {{ request()->routeIs('student.view.report') ? 'active' : '' }}"
-                        href="{{ url('students/report-view/' . Auth::user()->id) }}"><i
-                            class="bi bi-calendar2-week"></i> <span
-                            >Report</span></a>
-                </li>
+                @if (Auth::user()->role == 'student')
+                    <li>
+                        <a class="waves-effect {{ request()->routeIs('student.attendance.show') ? 'active' : '' }}"
+                            href="{{ route('student.attendance.show', ['id' => Auth::user()->id]) }}"><i
+                                class="bi bi-calendar2-week"></i> <span>Attendance</span></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect {{ request()->routeIs('student.profile.show') ? 'active' : '' }}"
+                            href="{{ url('students/view/profile/' . Auth::user()->id) }}"><i
+                                class="bi bi-calendar2-week"></i> <span>Profile</span></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect {{ request()->routeIs('student.view.report') ? 'active' : '' }}"
+                            href="{{ url('students/report-view/' . Auth::user()->id) }}"><i
+                                class="bi bi-calendar2-week"></i> <span>Report</span></a>
+                    </li>
 
 
 
-                <li>
-                    <a class="waves-effect {{ request()->routeIs('course.student.list.show') ? 'active' : '' }}"
-                        href="{{ route('course.student.list.show', ['student_id' => Auth::user()->id]) }}"><i
-                            class="bi bi-journal-medical"></i> <span
-                             >Subjects</span></a>
-                </li>
-                {{-- <li>
+                    <li>
+                        <a class="waves-effect {{ request()->routeIs('course.student.list.show') ? 'active' : '' }}"
+                            href="{{ route('course.student.list.show', ['student_id' => Auth::user()->id]) }}"><i
+                                class="bi bi-journal-medical"></i> <span>Subjects</span></a>
+                    </li>
+                    {{-- <li>
                         <a class="waves-effect" href="#"><i class="bi bi-file-post"></i> <span  >Assignments</span></a>
                     </li><li>
                         <a class="waves-effect" href="#"><i class="bi bi-cloud-sun"></i> <span  >Marks</span></a>
@@ -135,68 +124,63 @@
                     <li class="nav-item">
                         <a class="waves-effect" href="#"><i class="bi bi-journal-text"></i> <span>Syllabus</span></a>
                     </li> --}}
-                <li>
-                    @php
-                        if (session()->has('browse_session_id')) {
-                            $class_info = \App\Models\Promotion::where('session_id', session('browse_session_id'))
-                                ->where('student_id', Auth::user()->id)
-                                ->first();
-                        } else {
-                            $latest_session = \App\Models\SchoolSession::latest()->first();
-                            if ($latest_session) {
-                                $class_info = \App\Models\Promotion::where('session_id', $latest_session->id)
+                    <li>
+                        @php
+                            if (session()->has('browse_session_id')) {
+                                $class_info = \App\Models\Promotion::where('session_id', session('browse_session_id'))
                                     ->where('student_id', Auth::user()->id)
                                     ->first();
                             } else {
-                                $class_info = [];
+                                $latest_session = \App\Models\SchoolSession::latest()->first();
+                                if ($latest_session) {
+                                    $class_info = \App\Models\Promotion::where('session_id', $latest_session->id)
+                                        ->where('student_id', Auth::user()->id)
+                                        ->first();
+                                } else {
+                                    $class_info = [];
+                                }
                             }
-                        }
-                    @endphp
-                    <a class="waves-effect"
-                        href="{{ route('section.routine.show', [
-                            'class_id' => $class_info->class_id,
-                            'section_id' => $class_info->section_id,
-                        ]) }}"><i
-                            class="bi bi-calendar4-range"></i> <span
-                            >Routine</span></a>
-                </li>
-            @endif
-            @if (Auth::user()->role != 'student')
-                <li  >
-                    <a type="button" href="#exam-grade-submenu" data-bs-toggle="collapse"
-                        class="d-flex waves-effect {{ request()->is('exams*') ? 'active' : '' }}"><i
-                            class="bi bi-file-text"></i> <span
-                            class="ms-2 d-inline d-sm-none d-md-none d-xl-inline">Exams / Grades</span>
-                        <i class="ms-auto d-inline d-sm-none d-md-none d-xl-inline bi bi-chevron-down"></i>
-                    </a>
-                    <ul class="sub-menu  {{ request()->is('exams*') ? 'show' : 'hide' }} " aria-expanded="false">
-                   
-                        <li
-                            {{ request()->routeIs('exam.list.show') ? 'style="font-weight:bold;"' : '' }}><a
-                                class="waves-effect" href="{{ route('exam.list.show') }}"><i
-                                    class="bi bi-file-text me-2"></i> View Exams</a></li>
-                        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'teacher')
-                            <li
-                                {{ request()->routeIs('exam.create.show') ? 'style="font-weight:bold;"' : '' }}><a
-                                    class="waves-effect" href="{{ route('exam.create.show') }}"><i
-                                        class="bi bi-file-plus me-2"></i> Create Exams</a></li>
-                        @endif
-                        @if (Auth::user()->role == 'admin')
-                            <li
-                                {{ request()->routeIs('exam.grade.system.create') ? 'style="font-weight:bold;"' : '' }}>
-                                <a class="waves-effect" href="{{ route('exam.grade.system.create') }}"><i
-                                        class="bi bi-file-plus me-2"></i> Add Grade Systems</a>
+                        @endphp
+                        <a class="waves-effect"
+                            href="{{ route('section.routine.show', [
+                                'class_id' => $class_info->class_id,
+                                'section_id' => $class_info->section_id,
+                            ]) }}"><i
+                                class="ri-calendar-todo-line"></i> <span>Routine</span></a>
+                    </li>
+                @endif
+                @if (Auth::user()->role != 'student')
+                    <li>
+                        <a type="button" href="#exam-grade-submenu" data-bs-toggle="collapse"
+                            class="has-arrow waves-effect {{ request()->is('exams*') ? 'active' : '' }}"><i
+                                class="ri-article-line"></i> <span>Exams / Grades</span>
+                            <i class="ms-auto d-inline d-sm-none d-md-none d-xl-inline bi bi-chevron-down"></i>
+                        </a>
+                        <ul class="sub-menu  {{ request()->is('exams*') ? 'show' : 'hide' }} " aria-expanded="false">
+
+                            <li {{ request()->routeIs('exam.list.show') ? 'style="font-weight:bold;"' : '' }}><a
+                                    class="waves-effect" href="{{ route('exam.list.show') }}"> View Exams</a></li>
+                            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'teacher')
+                                <li {{ request()->routeIs('exam.create.show') ? 'style="font-weight:bold;"' : '' }}><a
+                                        class="waves-effect" href="{{ route('exam.create.show') }}"> Create Exams</a>
+                                </li>
+                            @endif
+                            @if (Auth::user()->role == 'admin')
+                                <li
+                                    {{ request()->routeIs('exam.grade.system.create') ? 'style="font-weight:bold;"' : '' }}>
+                                    <a class="waves-effect" href="{{ route('exam.grade.system.create') }}"> Add Grade
+                                        Systems</a>
+                                </li>
+                            @endif
+                            <li {{ request()->routeIs('exam.grade.system.index') ? 'style="font-weight:bold;"' : '' }}>
+                                <a class="waves-effect" href="{{ route('exam.grade.system.index') }}">View Grade
+                                    Systems</a>
                             </li>
-                        @endif
-                        <li
-                            {{ request()->routeIs('exam.grade.system.index') ? 'style="font-weight:bold;"' : '' }}><a
-                                class="waves-effect" href="{{ route('exam.grade.system.index') }}"><i
-                                    class="bi bi-file-ruled me-2"></i> View Grade Systems</a></li>
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
 
 
-                {{-- <li>
+                    {{-- <li>
                         <a type="button" href="#" class="d-flex waves-effect {{ request()->is('marks*')? 'active' : '' }} dropdown-toggle caret-off" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-cloud-sun"></i> <span class="ms-2 d-inline d-sm-none d-md-none d-xl-inline">Marks / Results</span>
                             <i class="ms-auto d-inline d-sm-none d-md-none d-xl-inline bi bi-chevron-down"></i>
                         </a>
@@ -205,60 +189,61 @@
                             <li><a class="dropdown-item" href="{{url('marks/results')}}">View Results</a></li>
                         </ul>
                     </li> --}}
-            @endif
-            @if (Auth::user()->role == 'admin')
+                @endif
+                @if (Auth::user()->role == 'admin')
+                    <li>
+                        <a class="waves-effect {{ request()->is('notice*') ? 'active' : '' }}"
+                            href="{{ route('notice.create') }}"><i class="ri-attachment-line"></i>
+                            <span>Notice</span></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect {{ request()->is('calendar-event*') ? 'active' : '' }}"
+                            href="{{ route('events.show') }}"><i class="ri-calendar-event-line"></i>
+                            <span>Event</span></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect {{ request()->is('syllabus*') ? 'active' : '' }}"
+                            href="{{ route('class.syllabus.create') }}"><i class="ri-archive-drawer-line"></i>
+                            <span>Syllabus</span></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect {{ request()->is('routine*') ? 'active' : '' }}"
+                            href="{{ route('section.routine.create') }}"><i class="ri-calendar-todo-line"></i>
+                            <span>Routine</span></a>
+                    </li>
+                @endif
+                @if (Auth::user()->role == 'admin')
+                    <li>
+                        <a class="waves-effect
+                                {{ request()->is('academics*') ? 'active' : '' }}"
+                            href="{{ url('academics/settings') }}">
+                            <i class="ri-settings-2-line"></i>
+                            <span>Academic</span></a>
+                    </li>
+                @endif
+                {{-- @if (!session()->has('browse_session_id') && Auth::user()->role == 'admin')
+                    <li>
+                        <a class="waves-effect {{ request()->is('promotions*') ? 'active' : '' }}"
+                            href="{{ url('promotions/index') }}"><i class="bi bi-sort-numeric-up-alt"></i>
+                            <span>Promotion</span></a>
+                    </li>
+                @endif
                 <li>
-                    <a class="waves-effect {{ request()->is('notice*') ? 'active' : '' }}"
-                        href="{{ route('notice.create') }}"><i class="bi bi-megaphone"></i> <span
-                            >Notice</span></a>
-                </li>
-                <li>
-                    <a class="waves-effect {{ request()->is('calendar-event*') ? 'active' : '' }}"
-                        href="{{ route('events.show') }}"><i class="bi bi-calendar-event"></i> <span
-                            >Event</span></a>
-                </li>
-                <li>
-                    <a class="waves-effect {{ request()->is('syllabus*') ? 'active' : '' }}"
-                        href="{{ route('class.syllabus.create') }}"><i class="bi bi-journal-text"></i> <span
-                            >Syllabus</span></a>
-                </li>
-                <li>
-                    <a class="waves-effect {{ request()->is('routine*') ? 'active' : '' }}"
-                        href="{{ route('section.routine.create') }}"><i class="bi bi-calendar4-range"></i> <span
-                            >Routine</span></a>
-                </li>
-            @endif
-            @if (Auth::user()->role == 'admin')
-                <li>
-                    <a class="waves-effect {{ request()->is('academics*') ? 'active' : '' }}"
-                        href="{{ url('academics/settings') }}"><i class="bi bi-tools"></i> <span
-                           >Academic</span></a>
-                </li>
-            @endif
-            @if (!session()->has('browse_session_id') && Auth::user()->role == 'admin')
-                <li>
-                    <a class="waves-effect {{ request()->is('promotions*') ? 'active' : '' }}"
-                        href="{{ url('promotions/index') }}"><i class="bi bi-sort-numeric-up-alt"></i> <span
-                             >Promotion</span></a>
-                </li>
-            @endif
-            <li>
-                <a class="waves-effect disabled" href="#" aria-disabled="true"><i
-                        class="bi bi-currency-exchange"></i> <span
-                       >Payment</span></a>
-            </li>
-            @if (Auth::user()->role == 'admin')
-                <li>
-                    <a class="waves-effect disabled" href="#" ><i
-                            class="bi bi-person-lines-fill"></i> <span
-                           >Staff</span></a>
-                </li>
-                <li>
-                    <a class="disabled" href="#" aria-disabled="true" class="waves-effect"><i class="bi bi-journals"></i>
-                        <span class="">Library</span></a>
-                </li>
-            @endif
-            <!-- <li>
+                    <a class="waves-effect disabled" href="#" aria-disabled="true"><i
+                            class="bi bi-currency-exchange"></i> <span>Payment</span></a>
+                </li> --}}
+                {{-- @if (Auth::user()->role == 'admin')
+                    <li>
+                        <a class="waves-effect disabled" href="#"><i class="bi bi-person-lines-fill"></i>
+                            <span>Staff</span></a>
+                    </li>
+                    <li>
+                        <a class="disabled" href="#" aria-disabled="true" class="waves-effect"><i
+                                class="bi bi-journals"></i>
+                            <span class="">Library</span></a>
+                    </li>
+                @endif --}}
+                <!-- <li>
                 <a href="calendar.html" class=" waves-effect">
                     <i class="ri-calendar-2-line"></i>
                     <span>Calendar</span>
@@ -490,9 +475,9 @@
                 </ul>
             </li> -->
 
-        </ul>
+            </ul>
+        </div>
+        <!-- Sidebar -->
     </div>
-    <!-- Sidebar -->
-</div>
 </div>
 <!-- Left Sidebar End -->

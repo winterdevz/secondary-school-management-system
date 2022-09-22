@@ -1,21 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-start">
-          
-            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-                <div class="row pt-2">
+    <div class="page-content mb-5">
+        <div class="container-fluid">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <div class="row ">
                     <div class="col ps-4">
-                        <h1 class="display-6 mb-3">
-                            <i class="bi bi-file-text"></i> Exams
-                        </h1>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Exam</li>
-                            </ol>
-                        </nav>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h2 class="mb-sm-0">
+                                        <i class="ri-list-check btn btn-primary"></i>
+                                        Exams
+                                    </h2>
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Exam</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                         <h6>Filter list by:</h6>
                         <div class="mb-4 mt-4">
                             <form action="{{ route('exam.list.show') }}" method="GET">
@@ -24,7 +32,8 @@
                                         <select class="form-select" aria-label="Class" name="class_id">
                                             @isset($classes)
                                                 @foreach ($classes as $school_class)
-                                                    <option value="{{ $school_class->id }}">{{ $school_class->class_name }}
+                                                    <option value="{{ $school_class->id }}">
+                                                        {{ $school_class->class_name }}
                                                     </option>
                                                 @endforeach
                                             @endisset
@@ -34,18 +43,21 @@
                                         <select class="form-select" aria-label="Status" name="semester_id">
                                             @isset($semesters)
                                                 @foreach ($semesters as $semester)
-                                                    <option value="{{ $semester->id }}">{{ $semester->semester_name }}</option>
+                                                    <option value="{{ $semester->id }}">
+                                                        {{ $semester->semester_name }}</option>
                                                 @endforeach
                                             @endisset
                                         </select>
                                     </div>
                                     <div class="col">
                                         <button type="submit" class="btn btn-primary"><i
-                                                class="bi bi-arrow-counterclockwise"></i> Load List</button>
+                                                class="bi bi-arrow-counterclockwise"></i> Load
+                                            List</button>
                                     </div>
                                 </div>
                             </form>
                             <div class="bg-white mt-4 p-3 border shadow-sm">
+                                <h5>Exam Details</h5>
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -100,11 +112,13 @@
                                                                     <a href="{{ route('exam.rule.create', ['exam_id' => $exam->id]) }}"
                                                                         role="button"
                                                                         class="btn btn-sm btn-outline-primary"><i
-                                                                            class="bi bi-plus"></i> Add Rule</a>
+                                                                            class="bi bi-plus"></i> Add
+                                                                        Rule</a>
                                                                     <a href="{{ route('exam.rule.show', ['exam_id' => $exam->id]) }}"
                                                                         role="button"
                                                                         class="btn btn-sm btn-outline-primary"><i
-                                                                            class="bi bi-eye"></i> View Rule</a>
+                                                                            class="bi bi-eye"></i> View
+                                                                        Rule</a>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -118,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-                 
+
             </div>
         </div>
     </div>

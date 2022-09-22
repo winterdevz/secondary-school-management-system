@@ -1,54 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-start">
-         
-            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-10 col-xl-10 col-xxl-10">
-                <div class="row pt-2">
+    <div class="page-content mb-5">
+        <div class="container-fluid">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <div class="row ">
                     <div class="col ps-4">
-                        <h1 class="display-6 mb-3"><i class="bi bi-plus"></i> Create Routine</h1>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Create Routine</li>
-                            </ol>
-                        </nav>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h2 class="mb-sm-0">
+                                        <i class="ri-calendar-2-line btn btn-primary"></i>
+                                        Create Routine
+                                    </h2>
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Create Routine</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                         @include('session-messages')
                         <div class="row">
-                            <div class="col-md-5 mb-4">
-                                <div class="p-3 border bg-light shadow-sm">
-                                    <form action="{{ route('section.routine.store') }}" method="POST">
+                            <div class="col-md-12 mb-4">
+                                <div class="p-3 border bg-white shadow-sm">
+                                    <form class="row" action="{{ route('section.routine.store') }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="session_id" value="{{ $current_school_session_id }}">
-                                        <div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
                                             <p class="mt-2">Select class:<sup><i
-                                                        class="bi bi-asterisk text-primary"></i></sup></p>
+                                                        class="ri-asterisk text-primary"></i></sup>
+                                            </p>
                                             <select onchange="getSectionsAndCourses(this);" class="form-select"
                                                 name="class_id" required>
                                                 @isset($classes)
                                                     <option selected disabled>Please select a class</option>
                                                     @foreach ($classes as $school_class)
-                                                        <option value="{{ $school_class->id }}">{{ $school_class->class_name }}
+                                                        <option value="{{ $school_class->id }}">
+                                                            {{ $school_class->class_name }}
                                                         </option>
                                                     @endforeach
                                                 @endisset
                                             </select>
                                         </div>
-                                        <div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
                                             <p class="mt-2">Select section:<sup><i
-                                                        class="bi bi-asterisk text-primary"></i></sup></p>
+                                                        class="ri-asterisk text-primary"></i></sup>
+                                            </p>
                                             <select class="form-select" id="section-select" name="section_id" required>
                                             </select>
                                         </div>
-                                        <div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
                                             <p class="mt-2">Select subject:<sup><i
-                                                        class="bi bi-asterisk text-primary"></i></sup></p>
+                                                        class="ri-asterisk text-primary"></i></sup>
+                                            </p>
                                             <select class="form-select" id="course-select" name="course_id" required>
                                             </select>
                                         </div>
-                                        <div class="mt-2">
-                                            <p>Week Day<sup><i class="bi bi-asterisk text-primary"></i></sup></p>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+                                            <p>Week Day<sup><i class="ri-asterisk text-primary"></i></sup>
+                                            </p>
                                             <select class="form-select" id="course-select" name="weekday" required>
                                                 <option value="1">Monday</option>
                                                 <option value="2">Tuesday</option>
@@ -59,27 +74,29 @@
                                                 <option value="7">Sunday</option>
                                             </select>
                                         </div>
-                                        <div class="mt-2">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                                             <label for="inputStarts" class="form-label">Starts<sup><i
-                                                        class="bi bi-asterisk text-primary"></i></sup></label>
+                                                        class="ri-asterisk text-primary"></i></sup></label>
                                             <input type="text" class="form-control" id="inputStarts" name="start"
                                                 placeholder="09:00am" required>
                                         </div>
-                                        <div class="mt-2">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                                             <label for="inputEnds" class="form-label">Ends<sup><i
-                                                        class="bi bi-asterisk text-primary"></i></sup></label>
+                                                        class="ri-asterisk text-primary"></i></sup></label>
                                             <input type="text" class="form-control" id="inputEnds" name="end"
                                                 placeholder="09:50am" required>
                                         </div>
-                                        <button type="submit" class="mt-3 btn btn-sm btn-outline-primary"><i
-                                                class="bi bi-check2"></i> Create</button>
+                                        <div class="mt-2 d-flex justify-content-end">
+                                            <button type="submit" class="mt-3 btn btn-primary px-4"><i
+                                                    class="bi bi-check2"></i> Create</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-               
+
             </div>
         </div>
     </div>
